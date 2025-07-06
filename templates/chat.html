@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chatbox Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e5e5f7;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .chat-container {
+      background: #fff;
+      width: 90%;
+      max-width: 900px;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #4f46e5;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1rem 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: #f9f9f9;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 0.75rem 1rem;
+      border-radius: 15px;
+      font-size: 1rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #4f46e5;
+      color: white;
+      border-bottom-right-radius: 0;
+    }
+
+    .assistant {
+      align-self: flex-start;
+      background: #e0e7ff;
+      color: #111827;
+      border-bottom-left-radius: 0;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+      padding: 1rem 2rem;
+      background: #fff;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .chat-input button {
+      margin-left: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #4f46e5;
+      border: none;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .chat-input button:hover {
+      background: #4338ca;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .chat-container {
+        width: 100%;
+        height: 95vh;
+        border-radius: 0;
+      }
+
+      .chat-messages {
+        padding: 1rem;
+      }
+
+      .chat-input {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .chat-input input, .chat-input button {
+        width: 100%;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Your Friendly Assistant 🤖</div>
+    <div class="chat-messages" id="chatMessages">
+      {% for chat in chat_history %}
+        <div class="message {{ chat.sender }}">
+          <pre style="margin: 0; white-space: pre-wrap;">{{ chat.message }}</pre>
+        </div>
+      {% endfor %}
+    </div>
+    <script>
+  	window.onload = function () {
+    		const chatMessages = document.getElementById('chatMessages');
+    		if (chatMessages) {
+      			chatMessages.scrollTop = chatMessages.scrollHeight;
+    		}
+  	};
+    </script>	
+    <form class="chat-input" method="post" action="/send">
+      <input type="text" name="user_message" placeholder="Type your message..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>
