@@ -43,11 +43,6 @@ logger = logging.getLogger(__name__)
 # Set up templates
 templates = Jinja2Templates(directory="templates")
 
-def linkify_text(text: str) -> str:
-    # Convert URLs to <a href="...">...</a>
-    url_pattern = r"(https?://[^\s]+)"
-    return re.sub(url_pattern, r'<a href="\1" target="_blank" rel="noopener noreferrer">\1</a>', text)
-
 # Store messages in memory (in production, use a DB or session)
 chat_history = [
     {"sender": "assistant", 
