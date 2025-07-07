@@ -22,7 +22,7 @@ You can also set your Gemini API key in your environment variables by running th
 export GEMINI_API_KEY=your_key_here
 ```
 
-The demo currently uses Gemini 2.5 Flash, do note that you can only do 250 requests per day with the App.
+The demo currently uses Gemini 2.0 Flash, do note that you can only do 200 requests per day with the App.
 
 ### Install dependencies
 
