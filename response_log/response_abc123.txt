@@ -1,0 +1,44 @@
+2025-07-07 23:16:20,955 - INFO - ai		Hi! I am your friendly handset recommender assistant! Before we start, can you please provide the numeric portion of yout customer id?
+     
+2025-07-07 23:16:32,607 - INFO - human	None	9999
+2025-07-07 23:16:34,669 - INFO - ai	None	
+2025-07-07 23:16:35,513 - INFO - tool	GetCustsTool	{'messages': [AIMessage(content='I do not have information for customer ID 9999.\nWhat phone are you interested in today?', additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-2.0-flash', 'safety_ratings': []}, id='run--886dfb70-722e-494c-b75c-ee15cad711a3-0', usage_metadata={'input_tokens': 119, 'output_tokens': 24, 'total_tokens': 143, 'input_token_details': {'cache_read': 0}})]}
+2025-07-07 23:16:36,326 - INFO - ai	None	I do not have information for customer ID 9999.
+What phone are you interested in today?
+2025-07-07 23:16:45,066 - INFO - human	None	oops sorry, it's 10
+2025-07-07 23:16:45,802 - INFO - ai	None	
+2025-07-07 23:16:46,829 - INFO - tool	GetCustsTool	{'messages': [AIMessage(content="Hi Joshua, I see you're currently using a Samsung Galaxy S23. Are you interested in upgrading to the latest Samsung model?", additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-2.0-flash', 'safety_ratings': []}, id='run--c7e4a89b-f8ed-4968-91e9-6ca50bc0f6ed-0', usage_metadata={'input_tokens': 160, 'output_tokens': 29, 'total_tokens': 189, 'input_token_details': {'cache_read': 0}})]}
+2025-07-07 23:16:48,005 - INFO - ai	None	Hi Joshua, I see you're currently using a Samsung Galaxy S23. Are you interested in upgrading to the latest Samsung model?
+2025-07-07 23:16:52,245 - INFO - human	None	yeah ok
+2025-07-07 23:16:53,002 - INFO - ai	None	
+2025-07-07 23:16:56,420 - INFO - tool	RecommendationTool	{'messages': [AIMessage(content='Here are the latest three Samsung phone models:\n\n1.  **Samsung Galaxy S25 (Icyblue):**\n    *   **Launch Date:** February 7, 2025\n    *   **Screen Size:** 6.2-inch Dynamic LTPO AMOLED 2X\n    *   **Chip:** Qualcomm Snapdragon 8 Elite\n    *   **Operating System:** Android 15, One UI 7\n    *   **Storage:** 512GB (12GB RAM)\n    *   **Weight:** 162 grams\n    *   **Price:** S$1,468\n\n2.  **Samsung Galaxy S25 (Icyblue):**\n    *   **Launch Date:** February 7, 2025\n    *   **Screen Size:** 6.2-inch Dynamic LTPO AMOLED 2X\n    *   **Chip:** Qualcomm Snapdragon 8 Elite\n    *   **Operating System:** Android 15, One UI 7\n    *   **Storage:** 128GB (12GB RAM)\n    *   **Weight:** 162 grams\n    *   **Price:** S$938\n\n3.  **Samsung Galaxy S25 (Icyblue):**\n    *   **Launch Date:** February 7, 2025\n    *   **Screen Size:** 6.2-inch Dynamic LTPO AMOLED 2X\n    *   **Chip:** Qualcomm Snapdragon 8 Elite\n    *   **Operating System:** Android 15, One UI 7\n    *   **Storage:** 256GB (12GB RAM)\n    *   **Weight:** 162 grams\n    *   **Price:** S$1,288', additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-2.0-flash', 'safety_ratings': []}, id='run--ea5804e4-7c47-4571-95a9-4f18d8298222-0', usage_metadata={'input_tokens': 712, 'output_tokens': 385, 'total_tokens': 1097, 'input_token_details': {'cache_read': 0}})]}
+2025-07-07 23:16:59,276 - INFO - ai	None	Here are the latest three Samsung phone models:
+
+1. **Samsung Galaxy S25 (Icyblue):**
+    * **Launch Date:** February 7, 2025
+    * **Screen Size:** 6.2-inch Dynamic LTPO AMOLED 2X
+    * **Chip:** Qualcomm Snapdragon 8 Elite
+    * **Operating System:** Android 15, One UI 7
+    * **Storage:** 512GB (12GB RAM)
+    * **Weight:** 162 grams
+    * **Price:** S$1,468
+
+2. **Samsung Galaxy S25 (Icyblue):**
+    * **Launch Date:** February 7, 2025
+    * **Screen Size:** 6.2-inch Dynamic LTPO AMOLED 2X
+    * **Chip:** Qualcomm Snapdragon 8 Elite
+    * **Operating System:** Android 15, One UI 7
+    * **Storage:** 128GB (12GB RAM)
+    * **Weight:** 162 grams
+    * **Price:** S$938
+
+3. **Samsung Galaxy S25 (Icyblue):**
+    * **Launch Date:** February 7, 2025
+    * **Screen Size:** 6.2-inch Dynamic LTPO AMOLED 2X
+    * **Chip:** Qualcomm Snapdragon 8 Elite
+    * **Operating System:** Android 15, One UI 7
+    * **Storage:** 256GB (12GB RAM)
+    * **Weight:** 162 grams
+    * **Price:** S$1,288
+
+Are you interested in any of these models?
