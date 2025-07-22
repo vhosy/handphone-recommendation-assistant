@@ -31,6 +31,7 @@ def recommendation_function(input_str: str) -> str:
        the phones' specifications.
        If user asks for all, retrieve all phones and ignore criteria to extract latest 3 phone
        based on launch date.
+       Always give the results in a numbered list format.
        If you don't know the answer, just say that you don't know. 
        """),
        ("human", "Question: {question}\nContext: {context}\nAnswer:")
@@ -79,6 +80,7 @@ get_cust_tool = Tool(
     func=get_cust_phone 
 )    
 
+
 def cross_sell_function (input_str: str) -> str:
     input_message = [
     SystemMessage(content="""Determine if customer shows interest in the phone model recommended.
@@ -98,17 +100,34 @@ cross_sell_tool = Tool(
     func= cross_sell_function
 )
 
-def go_checkout (input_str: str) -> str:
+
+def check_cross_sell_outcome_function (input_str: str) -> str:
     input_message = [
-    SystemMessage(content="""
-                  If customer indicates want or yes to XPower B10H power bank, give the url of phone model on https://shop.singtel.com and 
-                  XPower B10H power bank on https://shop.singtel.com/accessories/rrp-products/xpower-b10h-built-in-2-usb-c-cables-power-bank.
-                  If customer indicates no or does not want XPower B10H power bank, give url of phone model only on 
-                  https://shop.singtel.com.
-                  If customer unsure whether to get XPower B10H power bank, give 
-                  url of phone model only on https://shop.singtel.com
+    SystemMessage(content="""Determine if customer says yes to cross sell, or express
+                  interest in the cross sell product.  If yes return Y, else
+                  return N. Do not reply anything else.
                   """),
     HumanMessage(content=input_str)
+    ]
+    cross_sell_tag = llm.invoke(input_message).content
+    return cross_sell_tag
+
+cross_sell_outcome_tool = Tool(
+    name="CrossSellOutcomeTool",
+    description="Determine if customer wants the cross sell product",
+    func= check_cross_sell_outcome_function
+)
+    
+
+def go_checkout (cross_sell_tag: str) -> str:
+    input_message = [
+    SystemMessage(content="""
+                  If customer indicates want XPower B10H power bank, give the url of phone model on https://shop.singtel.com and 
+                  XPower B10H power bank on https://shop.singtel.com/accessories/rrp-products/xpower-b10h-built-in-2-usb-c-cables-power-bank.
+                  If customer does not want XPower B10H power bank, give url of phone model only on 
+                  https://shop.singtel.com.
+                  """),
+    HumanMessage(content=cross_sell_tag)
     ]
     response = llm.invoke(input_message)
     return response.content
@@ -118,27 +137,6 @@ checkout_tool = Tool(
     description="Helps customer go to checkout page of phone model",
     func=go_checkout
 )
-
-
-# =============================================================================
-# def go_checkout (input_str: str) -> str:
-#     input_message = [
-#     SystemMessage(content="""After cross selling, give the URL of 
-#                   the phone model customer wants on https://shop.singtel.com/.
-#                   If cross sell was successful, provide customer with this link
-#                   too: https://shop.singtel.com/accessories/rrp-products/xpower-b10h-built-in-2-usb-c-cables-power-bank
-#                   """),
-#     HumanMessage(content=input_str)
-#     ]
-#     response = llm.invoke(input_message)
-#     return response.content
-# 
-# checkout_tool = Tool(
-#     name="CheckoutTool",
-#     description="Helps customer go to checkout page of phone model",
-#     func=go_checkout
-# )
-# =============================================================================
 
 
 def guardrail_function(input_str: str) -> str:

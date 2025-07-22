@@ -8,25 +8,34 @@ from langchain.chat_models import init_chat_model
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.prebuilt import create_react_agent
 
-from codes.tools import guardrail_tool, recommendation_tool, cross_sell_tool, checkout_tool, get_cust_tool, jaibreak_tool
+from codes.tools import guardrail_tool, recommendation_tool, cross_sell_tool,\
+    checkout_tool, get_cust_tool, jaibreak_tool, cross_sell_outcome_tool
 
 app = FastAPI()
 
 # Create the agent
 memory = MemorySaver()
 model = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
-tools = [recommendation_tool, cross_sell_tool, checkout_tool, guardrail_tool, get_cust_tool, jaibreak_tool]
+tools = [recommendation_tool, cross_sell_tool, checkout_tool, guardrail_tool,\
+         get_cust_tool, jaibreak_tool,  cross_sell_outcome_tool]
 prompt = """You are a friendly handphone recommender assistant for customer.  
 At the start, customer would first need to input their customer ID so that 
 you can retrieve the current phone they possess with [get_cust_tool].  
-If customer does not want to provide customer ID, ask for their phone preferences.
-If customer say their phone preferences before providing customer ID, remind 
-customer to provide customer ID first. Just remind one time is enough.
+Certain criteria to look out for:
+1) If customer does not want to provide customer ID, ask for their phone preferences 
+    and go to 'next step'.
+2) If customer say their phone preferences before providing customer ID, remind 
+    customer to provide customer ID first, but just remind one time is enough.
+    go to 'next step'.
+
+'next step'
+Provide recommendations based on customer preferences.
 Do occasionally check with the customer if they want the phone model.
 If customer shows interest in the phone model recommended, or if customer says 
 he wants the phone the system specified or outrights mentions the phone model they want,
 use [cross_sell_tool] first.
-After [cross_sell_tool] done, use [checkout_tool].
+After [cross_sell_tool] done, use  [cross_sell_outcome_tool].
+Finally use [checkout_tool].
 """
 
 agent = create_react_agent(model, tools, checkpointer = memory, prompt = prompt)
